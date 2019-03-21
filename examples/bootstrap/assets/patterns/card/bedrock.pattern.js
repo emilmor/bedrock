@@ -1,20 +1,20 @@
-const schema = require('./button.schema');
+const schema = require('./card.schema');
 
 module.exports = {
-  id: 'button',
+  id: 'card',
   templates: [
     {
-      alias: '@components/button.html',
-      path: './button.html',
-      id: 'button-html',
-      title: 'Button - Html',
+      alias: '@components/card.html',
+      path: './card.html',
+      id: 'html',
+      title: 'Card - Html',
       docPath: './README-html.md',
     },
     {
-      alias: '@components/button.twig',
-      path: './button.twig',
-      id: 'button-twig',
-      title: 'Button - Twig',
+      alias: '@components/card.twig',
+      path: './card.twig',
+      id: 'twig',
+      title: 'Card - Twig',
       docPath: './README-twig.md',
       schema,
     },

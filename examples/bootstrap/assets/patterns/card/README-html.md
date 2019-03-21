@@ -1,25 +1,34 @@
-Bootstrap includes several predefined button styles, each serving its own semantic purpose, with a few extras thrown in for more control.
-
+Bootstrap's card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content, contextual background colors, and powerful display options. If you’re familiar with Bootstrap 3, cards replace our old panels, wells, and thumbnails. Similar functionality to those components is available as modifier classes for cards.
+           
 #### Example Usage
 
 ```html
-<button type="button" class="btn btn-primary">Primary</button>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 ```
 
-> Note: Conveying meaning to assistive technologies
-    Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies – such as screen readers. Ensure that information denoted by the color is either obvious from the content itself (e.g. the visible text), or is included through alternative means, such as additional text hidden with the .sr-only class.
-    
-#### Button Tags
+#### Content Types
 
-The `.btn` classes are designed to be used with the `<button>` element. However, you can also use these classes on `<a>` or `<input>` elements (though some browsers may apply a slightly different rendering).
+##### Body
+The building block of a card is the `.card-body`. Use it whenever you need a padded section within a card.
 
-When using button classes on `<a>` elements that are used to trigger in-page functionality (like collapsing content), rather than linking to new pages or sections within the current page, these links should be given a role="button" to appropriately convey their purpose to assistive technologies such as screen readers.
+##### Titles
+Card titles are used by adding `.card-title` to a <h*> tag. In the same way, links are added and placed next to each other by adding `.card-link` to an <a> tag.
 
-#### Outline buttons
+##### Subtitles
+Subtitles are used by adding a `.card-subtitle` to a <h*> tag. If the .card-title and the `.card-subtitle` items are placed in a `.card-body` item, the card title and subtitle are aligned nicely.
 
-In need of a button, but not the hefty background colors they bring? Replace the default modifier classes with the `.btn-outline-*` ones to remove all background images and colors on any button.
+##### Images
+`.card-img-top` places an image to the top of the card. With `.card-text`, text can be added to the card. Text within `.card-text` can also be styled with the standard HTML tags.
 
-#### Sizes
-
-Fancy larger or smaller buttons? Add `.btn-lg` or `.btn-sm` for additional sizes.
-
+##### List Groups
+`.list-group` creates lists of content in a card with a flush list group.
+              
+##### Card Headers
+Card headers can be styled by adding `.card-header` to <h*> elements.

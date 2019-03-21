@@ -18,7 +18,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '@basalt/bedrock-spinner';
-import { Button, Details, StatusMessage } from '@basalt/bedrock-atoms';
+import { Button, Details, Select, StatusMessage } from '@basalt/bedrock-atoms';
 import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
 import { BedrockContext } from '@basalt/bedrock-core';
 import SchemaForm from '@basalt/bedrock-schema-form';
@@ -27,6 +27,7 @@ import gql from 'graphql-tag';
 import qs from 'qs';
 import MdBlock from '../../components/md-block';
 import Template from '../../components/template';
+import TemplateCodeBlock from './template-code-block';
 import {
   LoadableSchemaTable,
   LoadableVariationDemo,
@@ -58,12 +59,16 @@ const patternQuery = gql`
         doc
         demoSize
         demoDatas
+        hideCodeBlock
+        assetSets {
+          id
+          title
+        }
       }
     }
   }
 `;
 
-// @todo UpdateReadme needs to work for each template doc
 const updateReadme = gql`
   mutation UpdateReadme($id: ID!, $templateId: ID!, $readme: String!) {
     setPatternTemplateReadme(
@@ -95,6 +100,9 @@ class TemplateView extends Component {
       isInline: null,
       title: null,
       ready: false,
+      assetSetId: null,
+      assetSets: null,
+      hideCodeBlock: null,
     };
     this.handleTemplateQuery = this.handleTemplateQuery.bind(this);
   }
@@ -122,6 +130,8 @@ class TemplateView extends Component {
           doc: readme,
           title,
           demoDatas,
+          assetSets,
+          hideCodeBlock,
         } = templates.find(t => t.id === this.props.templateId);
 
         const hasSchema = !!(
@@ -130,23 +140,19 @@ class TemplateView extends Component {
           Object.keys(schema.properties).length > 0
         );
 
-        let datas = [{}];
-        if (demoDatas) {
-          datas = demoDatas;
-        } else if (hasSchema && schema.examples && schema.examples.length > 0) {
-          datas = schema.examples;
-        }
-
         this.setState({
           demoDataIndex: 0,
-          demoDatas: datas,
-          data: datas[0],
+          demoDatas,
+          data: demoDatas[0],
           hasSchema,
           schema,
           readme,
           uiSchema,
           isInline,
           title,
+          assetSetId: assetSets[0].id,
+          assetSets,
+          hideCodeBlock,
           ready: true,
         });
       })
@@ -165,6 +171,9 @@ class TemplateView extends Component {
       isInline,
       title,
       ready,
+      assetSetId,
+      assetSets,
+      hideCodeBlock,
     } = this.state;
 
     if (!ready) return <div>Loading</div>;
@@ -175,6 +184,7 @@ class TemplateView extends Component {
       data: qs.stringify(this.state.data),
       isInIframe: false,
       wrapHtml: true,
+      assetSetId,
     });
     const externalUrl = `/api/render?${queryString}`;
 
@@ -193,6 +203,23 @@ class TemplateView extends Component {
                   Open in new window
                 </a>
               </Button>
+
+              {assetSets && assetSets.length > 1 && (
+                <Select
+                  items={assetSets.map(assetSet => ({
+                    title: assetSet.title,
+                    value: assetSet.id,
+                  }))}
+                  handleChange={newAssetSetId => {
+                    this.setState({
+                      assetSetId: newAssetSetId,
+                    });
+                  }}
+                  value={assetSetId}
+                  label="Asset Sets"
+                />
+              )}
+
               {demoDatas.length > 1 && (
                 <div
                   style={{
@@ -248,8 +275,8 @@ class TemplateView extends Component {
               <Template
                 patternId={this.props.id}
                 templateId={this.props.templateId}
+                assetSetId={assetSetId}
                 data={data}
-                showDataUsed={false}
                 isResizable
               />
             </DemoStage>
@@ -273,6 +300,16 @@ class TemplateView extends Component {
             )}
           </DemoGrid>
         </OverviewWrapper>
+
+        {this.props.isCodeBlockShown && !hideCodeBlock && (
+          <div style={{ marginBottom: '1rem' }}>
+            <TemplateCodeBlock
+              patternId={this.props.id}
+              templateId={this.props.templateId}
+              data={data}
+            />
+          </div>
+        )}
 
         {this.props.isReadmeShown && readme && (
           <Mutation
@@ -306,9 +343,6 @@ class TemplateView extends Component {
                         readme: newReadme,
                       },
                     });
-
-                    // @todo Refactor this so a reload is not needed
-                    // window.location.reload();
                   }}
                 />
               );
@@ -352,6 +386,7 @@ TemplateView.defaultProps = {
   isReadmeShown: true,
   isTitleShown: true,
   isSchemaFormShown: true,
+  isCodeBlockShown: false,
 };
 
 TemplateView.propTypes = {
@@ -362,6 +397,7 @@ TemplateView.propTypes = {
   isReadmeShown: PropTypes.bool,
   isTitleShown: PropTypes.bool,
   isSchemaFormShown: PropTypes.bool,
+  isCodeBlockShown: PropTypes.bool,
 };
 
 export default TemplateView;

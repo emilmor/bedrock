@@ -3,6 +3,164 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.1](https://github.com/basaltinc/bedrock/compare/v0.39.0...v0.39.1) (2019-03-07)
+
+**Note:** Version bump only for package @basalt/bedrock-monorepo
+
+
+
+
+
+# [0.39.0](https://github.com/basaltinc/bedrock/compare/v0.38.3...v0.39.0) (2019-03-07)
+
+
+### Features
+
+* nesting schema tables ([#198](https://github.com/basaltinc/bedrock/issues/198)) ([db99ee7](https://github.com/basaltinc/bedrock/commit/db99ee7))
+
+
+
+
+
+## [0.38.3](https://github.com/basaltinc/bedrock/compare/v0.38.2...v0.38.3) (2019-03-07)
+
+
+### Bug Fixes
+
+* code block padding ([822a0aa](https://github.com/basaltinc/bedrock/commit/822a0aa))
+
+
+
+
+
+## [0.38.2](https://github.com/basaltinc/bedrock/compare/v0.38.1...v0.38.2) (2019-03-06)
+
+
+### Bug Fixes
+
+* code block spacing ([3218ecb](https://github.com/basaltinc/bedrock/commit/3218ecb))
+
+
+
+
+
+## [0.38.1](https://github.com/basaltinc/bedrock/compare/v0.38.0...v0.38.1) (2019-03-06)
+
+
+### Bug Fixes
+
+* getTemplateCode merge ([f1c3d90](https://github.com/basaltinc/bedrock/commit/f1c3d90))
+
+
+
+
+
+# [0.38.0](https://github.com/basaltinc/bedrock/compare/v0.37.2...v0.38.0) (2019-03-06)
+
+
+### Bug Fixes
+
+* add hideCodeBlock option ([714c7f8](https://github.com/basaltinc/bedrock/commit/714c7f8))
+
+
+### Features
+
+* add template usage code block ([a8fe90e](https://github.com/basaltinc/bedrock/commit/a8fe90e))
+
+
+
+
+
+## [0.37.2](https://github.com/basaltinc/bedrock/compare/v0.37.1...v0.37.2) (2019-02-28)
+
+
+### Bug Fixes
+
+* add script tag type ([f863d23](https://github.com/basaltinc/bedrock/commit/f863d23))
+
+
+
+
+
+## [0.37.1](https://github.com/basaltinc/bedrock/compare/v0.37.0...v0.37.1) (2019-02-28)
+
+
+### Bug Fixes
+
+* move template show all button into template select ([0833b94](https://github.com/basaltinc/bedrock/commit/0833b94))
+* remove feedback page ([0220a8a](https://github.com/basaltinc/bedrock/commit/0220a8a))
+
+
+
+
+
+# [0.37.0](https://github.com/basaltinc/bedrock/compare/v0.36.0...v0.37.0) (2019-02-24)
+
+
+### Features
+
+* full access via programatic Node.js to everything ([fd7d3ad](https://github.com/basaltinc/bedrock/commit/fd7d3ad))
+* setup assetSets to replace config.{css,js} ([c672e32](https://github.com/basaltinc/bedrock/commit/c672e32))
+
+
+
+
+
+# [0.36.0](https://github.com/basaltinc/bedrock/compare/v0.35.0...v0.36.0) (2019-02-23)
+
+
+### Features
+
+* go to /demo-urls for simple link list of all demos ([1c3424e](https://github.com/basaltinc/bedrock/commit/1c3424e))
+
+
+
+
+
+# [0.35.0](https://github.com/basaltinc/bedrock/compare/v0.34.2...v0.35.0) (2019-02-23)
+
+
+### Features
+
+* add demo-urls cli command ([0e3ef23](https://github.com/basaltinc/bedrock/commit/0e3ef23))
+
+
+
+
+
+## [0.34.2](https://github.com/basaltinc/bedrock/compare/v0.34.1...v0.34.2) (2019-02-23)
+
+
+### Bug Fixes
+
+* consolidate pattern template demoDatas logic ([ce9a2da](https://github.com/basaltinc/bedrock/commit/ce9a2da))
+
+
+
+
+
+## [0.34.1](https://github.com/basaltinc/bedrock/compare/v0.34.0...v0.34.1) (2019-02-21)
+
+
+### Bug Fixes
+
+* template resize does not re-fetch ([0a39021](https://github.com/basaltinc/bedrock/commit/0a39021))
+
+
+
+
+
+# [0.34.0](https://github.com/basaltinc/bedrock/compare/v0.33.3...v0.34.0) (2019-02-17)
+
+
+### Features
+
+* add more tokens and custom docs ([0bb124f](https://github.com/basaltinc/bedrock/commit/0bb124f))
+
+
+
+
+
 ## [0.33.3](https://github.com/basaltinc/bedrock/compare/v0.33.2...v0.33.3) (2019-02-16)
 
 **Note:** Version bump only for package @basalt/bedrock-monorepo

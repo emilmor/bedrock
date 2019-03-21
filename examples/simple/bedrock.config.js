@@ -6,7 +6,7 @@ const { version } = require('./package.json');
 
 const format = theoBedrockFormat(theo);
 
-/** @type {BedrockConfig} */
+/** @type {BedrockUserConfig} */
 const config = {
   patterns: ['./assets/patterns/*', './assets/pages/*'],
   newPatternDir: './assets/patterns/',
@@ -24,8 +24,17 @@ const config = {
   dist: './dist',
   public: './public',
   data: './data',
-  css: ['./public/assets/simple.css'],
-  // js: ['./public/assets/script.js'],
+  assetSets: [
+    {
+      id: 'default',
+      title: 'Default',
+      assets: [
+        {
+          src: './public/assets/simple.css',
+        },
+      ],
+    },
+  ],
   changelog: './CHANGELOG.md',
   version,
   docsDir: './docs',

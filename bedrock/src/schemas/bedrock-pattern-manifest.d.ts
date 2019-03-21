@@ -157,7 +157,7 @@ interface BedrockPatternType {
 }
 
 interface BedrockPattern {
-  id: Id;
+  id: string;
   /**
    * Relative path to a JSON file that stores meta data for pattern. Schema for that file is in "pattern-meta.schema.json".
    */
@@ -172,6 +172,8 @@ type BedrockPatternTemplate = {
   name: string;
   path: string;
   absolutePath: string;
+  /** contents of file */
+  src: string;
   id: string;
   title: string;
   alias: string;
@@ -180,4 +182,15 @@ type BedrockPatternTemplate = {
   schema: Schema;
   uiSchema?: UiSchema;
   isInline?: IsInline;
+  assetSets: BedrockAssetSet[];
+  demoDatas?: Object[];
+  demoUrls: string[];
 };
+
+interface BedrockPatternTemplateCode {
+  html: string;
+  data?: Object;
+  templateSrc: string;
+  usage: string;
+  language: string;
+}

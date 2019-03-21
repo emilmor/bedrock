@@ -54,10 +54,6 @@ import {
 import { BASE_PATHS } from '../lib/constants';
 import './style.scss';
 
-const FeedbackPage = React.lazy(() =>
-  import(/* webpackChunkName: "feedback-page" */ './pages/feedback'),
-);
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -222,18 +218,6 @@ class App extends React.Component {
                               />
                             )}
                           />
-                          {this.state.permissions.includes('write') && (
-                            <Route
-                              path={`${BASE_PATHS.PATTERN}/:id/edit`}
-                              render={({ match, ...rest }) => (
-                                <LoadablePatternEdit
-                                  {...rest}
-                                  id={match.params.id}
-                                  key={match.params.id}
-                                />
-                              )}
-                            />
-                          )}
                           <Route
                             path={`${BASE_PATHS.DOCS}/:id`}
                             render={({ match }) => (
@@ -268,6 +252,20 @@ class App extends React.Component {
                               )}
                             />
                           )}
+
+                          {this.state.permissions.includes('write') && (
+                            <Route
+                              path={`${BASE_PATHS.PATTERN}/:id/edit`}
+                              render={({ match, ...rest }) => (
+                                <LoadablePatternEdit
+                                  {...rest}
+                                  id={match.params.id}
+                                  key={match.params.id}
+                                />
+                              )}
+                            />
+                          )}
+
                           <Route
                             path={`${BASE_PATHS.PATTERN}/:id`}
                             exact
@@ -349,14 +347,6 @@ class App extends React.Component {
                                 />
                               );
                             }}
-                          />
-                          <Route
-                            path="/feedback"
-                            render={() => (
-                              <React.Suspense fallback={<p>Loading...</p>}>
-                                <FeedbackPage />
-                              </React.Suspense>
-                            )}
                           />
                           <Route
                             path="/changelog"

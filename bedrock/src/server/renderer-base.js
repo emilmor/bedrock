@@ -17,7 +17,7 @@ class BedrockRendererBase {
     return theTemplatePath.endsWith(this.extension);
   }
 
-  getHead({ cssUrls = [], headJsUrls = [] }) {
+  getHead({ cssUrls = [], headJsUrls = [], inlineHead = '' }) {
     return `
     <!doctype html>
     <html lang="en">
@@ -29,20 +29,32 @@ class BedrockRendererBase {
               cssUrl =>
                 `<link rel="stylesheet" type="text/css" href="${cssUrl}">`,
             )
-            .join('')}
+            .join('\n')}
           ${headJsUrls
-            .map(jsUrl => `<script src="${jsUrl}"></script>`)
-            .join('')}
+            .map(
+              jsUrl =>
+                `<script src="${jsUrl}" type="text/javascript"></script>`,
+            )
+            .join('\n')}
+          ${inlineHead}
     </head>
     <body>
     `;
   }
 
-  getFoot({ jsUrls = [], inlineJs = '', inlineCss = '' } = {}) {
+  getFoot({
+    jsUrls = [],
+    inlineJs = '',
+    inlineCss = '',
+    inlineFoot = '',
+  } = {}) {
     return `
-    ${jsUrls.map(jsUrl => `<script src="${jsUrl}"></script>`).join('')}
+    ${jsUrls
+      .map(jsUrl => `<script src="${jsUrl}" type="text/javascript"></script>`)
+      .join('\n')}
 <style>${inlineCss}</style>
 <script>${inlineJs}</script>
+${inlineFoot}
 </body>
 </html>
     `;
@@ -55,11 +67,13 @@ class BedrockRendererBase {
     headJsUrls = [],
     inlineJs = '',
     inlineCss = '',
+    inlineHead = '',
+    inlineFoot = '',
   }) {
     return `
-${this.getHead({ cssUrls, headJsUrls })}
+${this.getHead({ cssUrls, headJsUrls, inlineHead })}
 <div>${html}</div>
-${this.getFoot({ jsUrls, inlineJs, inlineCss })}
+${this.getFoot({ jsUrls, inlineJs, inlineCss, inlineFoot })}
 `;
   }
 
@@ -73,6 +87,10 @@ ${this.getFoot({ jsUrls, inlineJs, inlineCss })}
 
   onRemove({ path }) {
     bedrockEvents.emit(EVENTS.PATTERN_TEMPLATE_REMOVED, { path });
+  }
+
+  getUsage() {
+    return '';
   }
 
   watch({ config, templatePaths }) {

@@ -1,9 +1,12 @@
 {
   "name": "@basalt/bedrock-renderer-react",
-  "version": "0.33.0",
+  "version": "0.39.0",
   "description": "Render React",
   "main": "src/index.js",
   "scripts": {},
+  "dependencies": {
+    "camelcase": "^4.1.0"
+  },
   "peerDependencies": {
     "@basalt/bedrock": "^0.32.0",
     "react": "^15.0.0 || ^16.0.0",

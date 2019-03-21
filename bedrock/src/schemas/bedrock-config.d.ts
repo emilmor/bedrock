@@ -6,6 +6,8 @@ interface BedrockTemplateRenderResults {
 
 interface BedrockTemplateRenderer {
   id: string;
+  extension: string;
+  language?: string;
   test: (theTemplatePath: string) => boolean;
   render: (opt: {
     template: BedrockPatternTemplate;
@@ -32,6 +34,8 @@ interface BedrockTemplateRenderer {
     headJsUrls?: string[];
     inlineJs?: string;
     inlineCss?: string;
+    inlineHead?: string;
+    inlineFoot?: string;
   }) => string;
   getHead: (opt: { cssUrls?: string[]; headJsUrls?: string[] }) => string;
   getFoot: (opt: {
@@ -43,6 +47,11 @@ interface BedrockTemplateRenderer {
   onAdd: (opt: { path: string }) => void;
   onRemove: (opt: { path: string }) => void;
   // renderString: (template: string, data?: object) => Promise<BedrockTemplateRenderResults>,
+  getUsage?: (opt: {
+    patternId: string;
+    template: BedrockPatternTemplate;
+    data?: Object;
+  }) => Promise<string>;
 }
 
 interface BedrockDesignToken {
@@ -55,6 +64,34 @@ interface BedrockDesignToken {
   comment?: string;
 }
 
+interface BedrockAssetSet {
+  id: string;
+  title: string;
+  assets: {
+    src: string;
+    publicPath: string;
+    type: string;
+    sizeKb: string;
+    sizeRaw: number;
+  }[];
+  inlineCss?: string;
+  inlineJs?: string;
+  inlineHead?: string;
+  inlineFoot?: string;
+}
+
+interface BedrockAssetSetUserConfig {
+  id: string;
+  title: string;
+  assets: {
+    src: string;
+  }[];
+  inlineCss?: string;
+  inlineJs?: string;
+  inlineHead?: string;
+  inlineFoot?: string;
+}
+
 interface BedrockConfig {
   patterns: string[];
   newPatternDir: string;
@@ -64,14 +101,7 @@ interface BedrockConfig {
   data: string;
   /** Hosted by bedrock server. Place compiled Design System css and js as well as images and other assets needed by bedrock */
   public: string;
-  /** Paths to css assets located within the public directory or absolute URL */
-  css?: string[];
-  /** Derived from `css` */
-  rootRelativeCSS?: string[];
-  /** Paths to js assets located within the public directory or absolute URL */
-  js?: string[];
-  /** Derived from `js` */
-  rootRelativeJs?: string[];
+  assetSets: BedrockAssetSetUserConfig[];
   templateRenderers: BedrockTemplateRenderer[];
   designTokens: {
     createCodeSnippet?: (BedrockDesignToken) => string;
@@ -90,4 +120,17 @@ interface BedrockUserConfig extends BedrockConfig {
    * @deprecated
    */
   templates?: BedrockTemplateRenderer[];
+
+  /**
+   * Paths to css assets located within the public directory or absolute URL
+   * Use assetSets
+   * @deprecated
+   * */
+  css?: string[];
+
+  /**
+   * Use assetSets
+   * @deprecated
+   */
+  js?: string[];
 }

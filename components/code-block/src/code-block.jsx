@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 import TabbedPanel from '@basalt/bedrock-tabbed-panel';
 import PrettyCode from '@basalt/bedrock-pretty-code';
 
-export { availableLanguages, languageList } from '@basalt/bedrock-pretty-code';
+export {
+  availableLanguages,
+  languageList,
+  isLanguageSupported,
+} from '@basalt/bedrock-pretty-code';
 
 const CodeBlock = ({ items = [] }) => {
   if (items.length === 0) {
     return null;
   }
-  const tabs = items.map(({ name = '', language = '', code = '' }) => ({
+  const tabs = items.map(({ name = '', language = '', code = '', id }) => ({
     title: name,
-    id: `${name}-${language}-${code}`,
+    id: id || `${name}-${language}-${code}`,
     children: (
       <PrettyCode
         role="textbox"
@@ -23,7 +27,7 @@ const CodeBlock = ({ items = [] }) => {
     ),
   }));
 
-  return <TabbedPanel bleed="0" color="component" items={tabs} />;
+  return <TabbedPanel bleed="10px" color="component" items={tabs} />;
 };
 
 CodeBlock.propTypes = {
